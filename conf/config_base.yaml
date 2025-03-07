@@ -1,0 +1,26 @@
+paths:
+  train_folder: ${hydra:runtime.cwd}/soy_seg_v1/train/data
+  train_target_folder: ${hydra:runtime.cwd}/soy_seg_v1/train/labels
+  val_folder: ${hydra:runtime.cwd}/soy_seg_v1/val/data
+  val_target_folder: ${hydra:runtime.cwd}/soy_seg_v1/val/labels
+
+model:
+  head: fpn
+  backbone: mit_b0
+
+train:
+  gpu: 3
+  learning_rate: 0.001
+  optimizer: adam
+  batch_size: 32
+  strategy: no_freeze
+  num_workers: 8
+  max_epochs: 3
+
+transform:
+  size: 256
+  crop_factor: 1
+  blur_kernel_size: 1
+  p_color_jitter: 0
+  rand_rot: False
+  scaling: False
